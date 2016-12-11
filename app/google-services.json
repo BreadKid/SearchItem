@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "397314204003",
+    "firebase_url": "https://searchitem-cc7d0.firebaseio.com",
+    "project_id": "searchitem-cc7d0",
+    "storage_bucket": "searchitem-cc7d0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:397314204003:android:33c893469ff96194",
+        "android_client_info": {
+          "package_name": "com.breadykid.searchitem"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "397314204003-ts3eiu1r5tge5t3rn3vc6brurgq4vvro.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.breadykid.searchitem",
+            "certificate_hash": "696957FCAF8513A2FFCD10A99F62DEBB5511D801"
+          }
+        },
+        {
+          "client_id": "397314204003-hf8nvptuuv97bmpdl05ijtt0ieo7okb2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAq4AhbURp2TT8SMofpbB4hv9GDQhdeqX0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "397314204003-hf8nvptuuv97bmpdl05ijtt0ieo7okb2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
