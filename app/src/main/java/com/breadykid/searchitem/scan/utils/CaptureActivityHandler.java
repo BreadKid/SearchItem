@@ -67,7 +67,6 @@ public class CaptureActivityHandler extends Handler {
 		case R.id.decode_succeeded:
 			state = State.SUCCESS;
 			Bundle bundle = message.getData();
-			Log.d(CaptureActivityHandler.class.getName()+"噗噗噗噗噗噗",message.getData().toString());
 			activity.handleDecode((Result) message.obj, bundle);
 			break;
 		case R.id.decode_failed:

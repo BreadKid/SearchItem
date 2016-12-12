@@ -35,8 +35,7 @@
         </activity>
         <!-- 扫描界面-->
         <activity
-            android:name=".CaptureActivity"
-            android:launchMode="singleTop">
+            android:name=".CaptureActivity">
             <intent-filter>
                 <action android:name="com.breadykid.searchitem.CaptureActivity" />
                 <category android:name="android.intent.category.DEFAULT" />

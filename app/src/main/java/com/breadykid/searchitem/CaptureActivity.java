@@ -2,7 +2,6 @@ package com.breadykid.searchitem;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -19,12 +18,12 @@ import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-
 import com.breadykid.searchitem.scan.camera.CameraManager;
 import com.breadykid.searchitem.scan.decode.DecodeThread;
 import com.breadykid.searchitem.scan.utils.BeepManager;
 import com.breadykid.searchitem.scan.utils.CaptureActivityHandler;
 import com.breadykid.searchitem.scan.utils.InactivityTimer;
+import com.breadykid.searchitem.util.StaticUtil;
 import com.google.zxing.Result;
 
 /**
@@ -160,15 +159,14 @@ public class CaptureActivity extends Activity implements SurfaceHolder.Callback 
     public void handleDecode(Result rawResult, Bundle bundle) {
         inactivityTimer.onActivity();
         beepManager.playBeepSoundAndVibrate();
+
         Intent resultIntent = new Intent();
         bundle.putInt("width", mCropRect.width());
         bundle.putInt("height", mCropRect.height());
-        Log.d("扫描啊啊啊啊", rawResult.getText());
         bundle.putString("result", rawResult.getText());
         resultIntent.putExtras(bundle);
-        this.setResult(123);
+        this.setResult(StaticUtil.RESULT_OK,resultIntent);
         this.finish();
-//        startActivity(new Intent(CaptureActivity.this, MainActivity.class).putExtras(bundle));
     }
 
     private void initCamera(SurfaceHolder surfaceHolder) {
