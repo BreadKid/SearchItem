@@ -7,24 +7,68 @@ package com.breadykid.searchitem.domain;
 
 public class Item {
 
-    private String name;
-    private String type;
-    private String size;
+    private String code;//条码
+    private String name;//品名
+    private String type;//分类
+    private String size;//规格
+    private String company;//公司
+//    private String controy;//国家
+
+    public Item(String code, String name) {
+        this.code = code;
+        this.name = name;
+    }
 
     public Item(String name, String type, String size) {
+        this.type = type;
+        this.name = name;
+        this.size = size;
+    }
+
+    public Item(String code, String name, String type, String size, String company) {
+        this.code = code;
         this.name = name;
         this.type = type;
         this.size = size;
+        this.company = company;
+//        this.controy = controy;
     }
 
     @Override
     public String toString() {
         return "Item{" +
-                "name='" + name + '\'' +
+                "code='" + code + '\'' +
+                ", name='" + name + '\'' +
                 ", type='" + type + '\'' +
                 ", size='" + size + '\'' +
+                ", company='" + company + '\'' +
+//                ", controy='" + controy + '\'' +
                 '}';
     }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getCompany() {
+        return company;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
+    }
+
+//    public String getControy() {
+//        return controy;
+//    }
+
+//    public void setControy(String controy) {
+//        this.controy = controy;
+//    }
 
     public String getName() {
         return name;

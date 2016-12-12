@@ -8,6 +8,8 @@
         android:id="@+id/tv_item"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textColor="@color/secondary_text"
         android:text="测试商品名"/>
 
 </LinearLayout>

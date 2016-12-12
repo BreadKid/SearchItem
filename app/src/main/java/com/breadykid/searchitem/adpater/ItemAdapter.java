@@ -23,9 +23,9 @@ public class ItemAdapter extends BaseAdapter {
     TextView tv;
 
     private Context context;
-    private Item item=null;
+    private String item=null;
 
-    public ItemAdapter(Context mContext, Item mItem) {
+    public ItemAdapter(Context mContext, String mItem) {
         super();
         context = mContext;
         item = mItem;
