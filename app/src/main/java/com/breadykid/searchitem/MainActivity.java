@@ -1,23 +1,33 @@
 package com.breadykid.searchitem;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.support.design.widget.Snackbar;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.breadykid.searchitem.adpater.ItemAdapter;
+import com.breadykid.searchitem.adpater.RecyclerViewAdapter;
 import com.breadykid.searchitem.domain.Item;
 import com.breadykid.searchitem.http.Http;
 import com.breadykid.searchitem.http.MessageResponse;
 import com.breadykid.searchitem.scan.decode.DecodeThread;
 import com.breadykid.searchitem.util.ScanPicShow;
+import com.breadykid.searchitem.util.SnackbarUtil;
 import com.breadykid.searchitem.util.StaticUtil;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.database.ChildEventListener;
@@ -48,6 +58,11 @@ public class MainActivity extends Activity {
     ListView listView;
     @Bind(R.id.btn_search)
     ImageView btnSearch;
+    //    @Bind(R.id.recycler_view)
+    private RecyclerView recyclerView;
+
+    private RecyclerView.Adapter recyclerViewAdapter;
+    private RecyclerView.LayoutManager recyclerViewLayoutManager;
 
     // 数据分析
     private FirebaseAnalytics mFirebaseAnalytics;
@@ -61,6 +76,11 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+//        recyclerView.setHasFixedSize(true);
+        // use a linear layout manager
+//        recyclerViewLayoutManager = new LinearLayoutManager(this);
+//        recyclerView.setLayoutManager(recyclerViewLayoutManager);
+
         // Obtain the FirebaseAnalytics instance.
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
@@ -81,20 +101,22 @@ public class MainActivity extends Activity {
                         if (scanCode.startsWith("http")) { // URL
                             listView.setAdapter(new ItemAdapter(getApplicationContext(), new Item(scanCode, scanCode)));
                             Toast.makeText(this, "这是个链接哟！", Toast.LENGTH_SHORT).show();
+//                            SnackbarUtil.ShortSnackbar(getWindow().getDecorView(), "这是个链接哟！", R.color.primary_dark, R.color.accent);
+//
                         } else if (scanCode.length() == 8 || scanCode.length() == 13) { // 条形码
                             Http.getInstance().searchItem(scanCode, new MessageResponse() {
                                 @Override
                                 public void onReceivedSuccess(Object o) {
-                                    if (o!=null){
+                                    if (o != null) {
                                         Item itemO = (Item) o;
                                         saveDB(itemO);
-                                        String searchPrice=itemO.getName()+" "+itemO.getType()+""+itemO.getSize();
-                                        Http.getInstance().searchPriceByTaoBao(searchPrice);
-                                    }else {
+
+                                    } else {
                                         Handler handler = new Handler(Looper.getMainLooper());
                                         handler.post(new Runnable() {
                                             @Override
                                             public void run() {
+//                                                SnackbarUtil.ShortSnackbar(getWindow().getDecorView(), "暂时没有您要找的商品！", R.color.primary_dark, R.color.accent);
                                                 Toast.makeText(MainActivity.this, "暂时没有您要找的商品！", Toast.LENGTH_SHORT).show();
                                             }
                                         });
@@ -148,10 +170,35 @@ public class MainActivity extends Activity {
         childRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Item itemRead = new Item(dataSnapshot.child("name").getValue(String.class),dataSnapshot.child("type").getValue(String.class),dataSnapshot.child("size").getValue(String.class),dataSnapshot.child("company").getValue(String.class));
+                final Item itemRead = new Item(dataSnapshot.child("name").getValue(String.class), dataSnapshot.child("type").getValue(String.class), dataSnapshot.child("size").getValue(String.class), dataSnapshot.child("company").getValue(String.class));
                 Log.d("测试数据", dataSnapshot.getChildren().toString());
                 if (itemRead != null) {
+                    // specify an adapter (see also next example)
+//                    recyclerView.setAdapter(new RecyclerViewAdapter(getApplicationContext(), itemRead));
                     listView.setAdapter(new ItemAdapter(getApplicationContext(), itemRead));
+                    listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                            ListView listView = (ListView) adapterView;
+//                            HashMap<String, String> map = (HashMap<String, String>) listView.getItemAtPosition(i);
+//                            String name = map.get("tv_item_name");
+//                            String type = map.get("tv_item_type");
+//                            String size = map.get("tv_item_size");
+                            String searchPrice = itemRead.getName() + " " + itemRead.getType() + "" + itemRead.getSize();
+                            Http.getInstance().searchPriceByTaoBao(searchPrice, new MessageResponse() {
+                                @Override
+                                public void onReceivedSuccess(Object o) {
+                                    String str = (String)o;
+                                    String a = str.replace("[","");
+                                    String b = a.replace("]","");
+                                    String c = b.replace("\"","");
+                                    String[] listAll = c.split(",");
+                                    String[] list = {listAll[0],listAll[1],listAll[2]};
+                                    new AlertDialog.Builder(MainActivity.this).setTitle("淘宝最低价(前三)").setItems(list,null).show();
+                                }
+                            });
+                        }
+                    });
                 }
             }
 

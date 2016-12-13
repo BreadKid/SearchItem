@@ -18,21 +18,38 @@
             android:layout_width="250dp"
             android:layout_height="250dp"
             android:layout_gravity="center"
+            android:alpha="0.8"
+            android:stateListAnimator="@drawable/selector"
             android:src="@drawable/sraech_icon"/>
+            <!--android:stateListAnimator="@drawable/click_selector" />-->
+        <!--android:background="?android:attr/selectableItemBackgroundBorderless"-->
+        <!--app:backgroundTint="@color/accent"-->
+        <!--app:elevation="6dp"-->
+        <!--app:fabSize="normal"-->
+        <!--app:pressedTranslationZ="25dp"-->
+        <!--app:rippleColor="@color/primary_dark"-->
 
     </LinearLayout>
 
-    <ScrollView
+    <!-- A RecyclerView with some commonly used attributes -->
+    <!--<android.support.v7.widget.RecyclerView-->
+    <!--android:id="@+id/recycler_view"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_margin="8dp"-->
+    <!--android:scrollbars="vertical" />-->
+
+    <ListView
+        android:id="@+id/lv_item_info"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
-        <ListView
-            android:id="@+id/lv_item_info"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:divider="@color/primary_light"
-            android:dividerHeight="1dp"/>
+    </ListView>
 
-    </ScrollView>
+    <!--<android.support.design.widget.CoordinatorLayout-->
+        <!--android:id="@+id/container"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentBottom="true"/>-->
 
 </LinearLayout>

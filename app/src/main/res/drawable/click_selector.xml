@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/press"
+        android:state_pressed="true"
+        android:drawable="@color/primary" />
+    <item
+        android:id="@+id/focus"
+        android:state_focused="true"
+        android:drawable="@color/primary_dark" />
+    <item
+        android:id="@+id/normal"
+        android:drawable="@color/primary_light" />
+
+    <transition
+        android:fromId="@id/normal"
+        android:toId="@id/press">
+        <animation-list>
+            <item android:duration="200" android:drawable="@color/primary_dark" />
+            <item android:duration="200" android:drawable="@color/primary_light" />
+        </animation-list>
+    </transition>
+</animated-selector>

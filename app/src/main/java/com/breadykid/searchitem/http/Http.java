@@ -65,6 +65,7 @@ public class Http {
 
     /**
      * 中国商品编码网搜索商品信息
+     *
      * @param code
      * @param messageResponse
      */
@@ -81,7 +82,7 @@ public class Http {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.isSuccessful()) {
-                    AsyncJsoup ac = new AsyncJsoup(call,messageResponse);
+                    AsyncJsoup ac = new AsyncJsoup(call, messageResponse);
                     ac.execute();
                 }
             }
@@ -95,36 +96,37 @@ public class Http {
 
     /**
      * 淘宝搜索商品价格
+     *
      * @param item
      */
-    public void searchPriceByTaoBao(String item){
+    public void searchPriceByTaoBao(String item, final MessageResponse msr) {
         retrofit = new Retrofit.Builder()
                 .client(builder.build())
                 .baseUrl(SEARCH_ITEM_PRICE_TAOBAO)
                 .build();
         searchPriceTaoBaoService = retrofit.create(SearchPriceTaoBaoService.class);
 
-        Map<String,String> mapOption=new HashMap<>();
-        mapOption.put("q",item);// url encode
-        mapOption.put("stats_click","search_radio_all%3A1");
-        mapOption.put("initiative_id","staobaoz_20161213"/*+ System.currentTimeMillis()*/);// 20161212
-        mapOption.put("sort","price-asc");
-        mapOption.put("ajax","true");
+        Map<String, String> mapOption = new HashMap<>();
+        mapOption.put("q", item);// url encode
+        mapOption.put("stats_click", "search_radio_all%3A1");
+        mapOption.put("initiative_id", "staobaoz_20161213"/*+ System.currentTimeMillis()*/);// 20161212
+        mapOption.put("sort", "price-asc");
+        mapOption.put("ajax", "true");
 
         Call<ResponseBody> callPriceTaoBao = searchPriceTaoBaoService.searchPriceByTaoBao(mapOption);
         Log.d("通信地址", callPriceTaoBao.request().url().toString());
         callPriceTaoBao.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if (response.isSuccessful()){
+                if (response.isSuccessful()) {
                     try {
                         String priceTaoBao = response.body().string();
                         String json1 = new JSONObject(priceTaoBao).getString(TAOBAO_JSON_TAG1);
-                        String json2= new JSONObject(json1).getString(TAOBAO_JSON_TAG2);
-                        String json3= new JSONObject(json2).getString(TAOBAO_JSON_TAG3);
-                        String json= new JSONObject(json3).getString(TAOBAO_JSON_PRICE);
-                        Log.d("淘宝返回json",json);
-
+                        String json2 = new JSONObject(json1).getString(TAOBAO_JSON_TAG2);
+                        String json3 = new JSONObject(json2).getString(TAOBAO_JSON_TAG3);
+                        String json = new JSONObject(json3).getString(TAOBAO_JSON_PRICE);
+                        Log.d("淘宝返回json", json);
+                        msr.onReceivedSuccess(json);
                     } catch (IOException e) {
                         e.printStackTrace();
                     } catch (JSONException e) {
