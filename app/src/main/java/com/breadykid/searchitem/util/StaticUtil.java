@@ -5,7 +5,12 @@ package com.breadykid.searchitem.util;
  */
 
 public class StaticUtil {
-    public static final int RESULT_OK=123;
     public static final String SEARCH_ITEM="http://search.anccnet.com/";
-    public static final int DEFAULT_TIMEOUT = 5;
+    public static final String SEARCH_ITEM_PRICE_TAOBAO="https://s.taobao.com/";
+    public static final String TAOBAO_JSON_TAG1="mainInfo";
+    public static final String TAOBAO_JSON_TAG2="traceInfo";
+    public static final String TAOBAO_JSON_TAG3="traceData";
+    public static final String TAOBAO_JSON_PRICE="allPrices";
+    public static final int DEFAULT_TIMEOUT = 10;
+
 }

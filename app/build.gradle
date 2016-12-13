@@ -40,4 +40,6 @@ dependencies {
     compile 'com.squareup.retrofit2:retrofit:2.0.2'
     // jsoup HTML parser library @ http://jsoup.org/
     compile 'org.jsoup:jsoup:1.10.1'
+    // Gson解析
+    compile 'com.google.code.gson:gson:2.8.0'
 }

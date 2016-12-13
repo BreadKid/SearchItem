@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.util.TypedValue;
 import android.widget.ImageView;
@@ -24,6 +26,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.gson.Gson;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -32,7 +35,12 @@ import butterknife.OnClick;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.Toast;
 
-public class MainActivity extends Activity{
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+
+public class MainActivity extends Activity {
 
     private final static int SCANNIN_GREQUEST_CODE = 1;
 
@@ -71,14 +79,26 @@ public class MainActivity extends Activity{
                         final String scanCode = bundle.getString("result");
                         new ScanPicShow().showScan(bundle, getApplicationContext(), btnSearch);
                         if (scanCode.startsWith("http")) { // URL
-                            listView.setAdapter(new ItemAdapter(getApplicationContext(), scanCode));
+                            listView.setAdapter(new ItemAdapter(getApplicationContext(), new Item(scanCode, scanCode)));
                             Toast.makeText(this, "这是个链接哟！", Toast.LENGTH_SHORT).show();
                         } else if (scanCode.length() == 8 || scanCode.length() == 13) { // 条形码
                             Http.getInstance().searchItem(scanCode, new MessageResponse() {
                                 @Override
                                 public void onReceivedSuccess(Object o) {
-                                    Item itemO= (Item) o;
-                                    saveDB(itemO);
+                                    if (o!=null){
+                                        Item itemO = (Item) o;
+                                        saveDB(itemO);
+                                        String searchPrice=itemO.getName()+" "+itemO.getType()+""+itemO.getSize();
+                                        Http.getInstance().searchPriceByTaoBao(searchPrice);
+                                    }else {
+                                        Handler handler = new Handler(Looper.getMainLooper());
+                                        handler.post(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                Toast.makeText(MainActivity.this, "暂时没有您要找的商品！", Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+                                    }
                                 }
                             });
                         }
@@ -91,7 +111,8 @@ public class MainActivity extends Activity{
         }
     }
 
-    private void saveDB(final Item itemSave){
+    // firebase real db
+    private void saveDB(final Item itemSave) {
         // 添加存储分类
         itemRef.addChildEventListener(new ChildEventListener() {
             @Override
@@ -121,17 +142,16 @@ public class MainActivity extends Activity{
         });
         childRef = itemRef.child(itemSave.getCode());
         //存显示扫描到的内容
-        childRef.setValue(itemSave.toString());
+        childRef.setValue(itemSave);
 
         // 取数据
         childRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                String demo = dataSnapshot.getValue(String.class);
-                if (demo != null) {
-                    Log.d("测试", demo);
-
-                    listView.setAdapter(new ItemAdapter(getApplicationContext(), demo));
+                Item itemRead = new Item(dataSnapshot.child("name").getValue(String.class),dataSnapshot.child("type").getValue(String.class),dataSnapshot.child("size").getValue(String.class),dataSnapshot.child("company").getValue(String.class));
+                Log.d("测试数据", dataSnapshot.getChildren().toString());
+                if (itemRead != null) {
+                    listView.setAdapter(new ItemAdapter(getApplicationContext(), itemRead));
                 }
             }
 

@@ -40,7 +40,9 @@ public class AsyncJsoup extends AsyncTask {
                 item = null;
             } else {
                 // 处理string
+
                 String[] strItem = itemInfo.text().split(" ");
+
                 Log.d("商品信息处理", strItem[1]);
                 item = new Item(strItem[1], strItem[10], strItem[4], strItem[12], strItem[6]);
             }

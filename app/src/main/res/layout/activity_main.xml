@@ -29,7 +29,9 @@
         <ListView
             android:id="@+id/lv_item_info"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:divider="@color/primary_light"
+            android:dividerHeight="1dp"/>
 
     </ScrollView>
 

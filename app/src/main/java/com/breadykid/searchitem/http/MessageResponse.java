@@ -5,5 +5,5 @@ package com.breadykid.searchitem.http;
  */
 
 public interface MessageResponse {
-    public void onReceivedSuccess(Object o);
+    void onReceivedSuccess(Object o);
 }

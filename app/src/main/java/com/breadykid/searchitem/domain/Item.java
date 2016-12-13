@@ -19,10 +19,11 @@ public class Item {
         this.name = name;
     }
 
-    public Item(String name, String type, String size) {
-        this.type = type;
+    public Item(String name, String type, String size, String company) {
         this.name = name;
+        this.type = type;
         this.size = size;
+        this.company = company;
     }
 
     public Item(String code, String name, String type, String size, String company) {
@@ -42,7 +43,6 @@ public class Item {
                 ", type='" + type + '\'' +
                 ", size='" + size + '\'' +
                 ", company='" + company + '\'' +
-//                ", controy='" + controy + '\'' +
                 '}';
     }
 
