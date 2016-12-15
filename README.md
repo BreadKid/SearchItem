@@ -75,7 +75,7 @@ dependencies {
 ```
 --
 ### 展示
-<img src="https://github.com/BreadKid/SearchItem/blob/master/readme_pic/Screenshot_2016-12-14-19-21-02-895_com.breadykid.searchitem.png?raw=true" width = "270" height = "480"/>   <img src="https://github.com/BreadKid/SearchItem/blob/master/readme_pic/Screenshot_2016-12-14-19-22-26-141_com.breadykid.searchitem.png?raw=true" width = "270" height = "480"/>   <img src="https://github.com/BreadKid/SearchItem/blob/master/readme_pic/Screenshot_2016-12-14-19-22-45-163_com.breadykid.searchitem.png?raw=true" width = "270" height = "480"/>   <img src="https://github.com/BreadKid/SearchItem/blob/master/readme_pic/Screenshot_2016-12-14-19-22-53-686_com.breadykid.searchitem.png?raw=true" width = "270" height = "480"/>
+<img src="https://github.com/BreadKid/SearchItem/blob/master/readme_pic/Screenshot_2016-12-14-19-21-02-895_com.breadykid.searchitem.png?raw=true" width = "202" height = "360"/>   <img src="https://github.com/BreadKid/SearchItem/blob/master/readme_pic/Screenshot_2016-12-14-19-22-26-141_com.breadykid.searchitem.png?raw=true" width = "202" height = "360"/>   <img src="https://github.com/BreadKid/SearchItem/blob/master/readme_pic/Screenshot_2016-12-14-19-22-45-163_com.breadykid.searchitem.png?raw=true" width = "202" height = "360"/>   <img src="https://github.com/BreadKid/SearchItem/blob/master/readme_pic/Screenshot_2016-12-14-19-22-53-686_com.breadykid.searchitem.png?raw=true" width = "202" height = "360"/>
 
 --
 ### Bug
