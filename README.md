@@ -1,4 +1,7 @@
 # SearchItem
+
+<img src="https://github.com/BreadKid/SearchItem/blob/master/readme_pic/sraech_icon.jpg" width = "180" height = "180"/>
+
 商品条形码／二维码搜索 Android APP  
 
 ---
