@@ -2,33 +2,21 @@ package com.breadykid.searchitem;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.support.design.widget.Snackbar;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
-
 import com.breadykid.searchitem.adpater.ItemAdapter;
-import com.breadykid.searchitem.adpater.RecyclerViewAdapter;
 import com.breadykid.searchitem.domain.Item;
 import com.breadykid.searchitem.http.Http;
 import com.breadykid.searchitem.http.MessageResponse;
-import com.breadykid.searchitem.scan.decode.DecodeThread;
 import com.breadykid.searchitem.util.ScanPicShow;
-import com.breadykid.searchitem.util.SnackbarUtil;
-import com.breadykid.searchitem.util.StaticUtil;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -36,19 +24,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.gson.Gson;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-
-import android.widget.LinearLayout.LayoutParams;
 import android.widget.Toast;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.HashMap;
 
 public class MainActivity extends Activity {
 
@@ -58,7 +37,7 @@ public class MainActivity extends Activity {
     ListView listView;
     @Bind(R.id.btn_search)
     ImageView btnSearch;
-    //    @Bind(R.id.recycler_view)
+//        @Bind(R.id.recycler_view)
     private RecyclerView recyclerView;
 
     private RecyclerView.Adapter recyclerViewAdapter;
@@ -117,7 +96,7 @@ public class MainActivity extends Activity {
                                             @Override
                                             public void run() {
 //                                                SnackbarUtil.ShortSnackbar(getWindow().getDecorView(), "暂时没有您要找的商品！", R.color.primary_dark, R.color.accent);
-                                                Toast.makeText(MainActivity.this, "暂时没有您要找的商品！", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(MainActivity.this, "亲，这可能是进口货哟～", Toast.LENGTH_SHORT).show();
                                             }
                                         });
                                     }
@@ -179,7 +158,7 @@ public class MainActivity extends Activity {
                     listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                            ListView listView = (ListView) adapterView;
+//                            ListView listView = (ListView) adapterView;
 //                            HashMap<String, String> map = (HashMap<String, String>) listView.getItemAtPosition(i);
 //                            String name = map.get("tv_item_name");
 //                            String type = map.get("tv_item_type");
@@ -189,12 +168,16 @@ public class MainActivity extends Activity {
                                 @Override
                                 public void onReceivedSuccess(Object o) {
                                     String str = (String)o;
-                                    String a = str.replace("[","");
-                                    String b = a.replace("]","");
-                                    String c = b.replace("\"","");
-                                    String[] listAll = c.split(",");
-                                    String[] list = {listAll[0],listAll[1],listAll[2]};
-                                    new AlertDialog.Builder(MainActivity.this).setTitle("淘宝最低价(前三)").setItems(list,null).show();
+                                    if (str.contains("[")&&str.contains("]")){
+                                        String a = str.replace("[","");
+                                        String b = a.replace("]","");
+                                        String c = b.replace("\"","");
+                                        String[] listAll = c.split(",");
+                                        String[] list = {listAll[0],listAll[1],listAll[2]};
+                                        new AlertDialog.Builder(MainActivity.this).setTitle("淘宝最低价(前三)").setItems(list,null).show();
+                                    }else {
+                                        Toast.makeText(MainActivity.this, str, Toast.LENGTH_SHORT).show();
+                                    }
                                 }
                             });
                         }

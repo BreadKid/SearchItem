@@ -7,15 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
-
 import com.breadykid.searchitem.R;
 import com.breadykid.searchitem.domain.Item;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import butterknife.Bind;
-import butterknife.ButterKnife;
 
 /**
  * Created by breadykid on 2016/12/11.

@@ -1,32 +1,18 @@
 package com.breadykid.searchitem.http;
 
 import android.util.Log;
-import android.widget.Toast;
-
-import com.breadykid.searchitem.domain.Item;
-import com.breadykid.searchitem.util.StaticUtil;
-
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.FormElement;
-import org.jsoup.select.Elements;
-
 import java.io.IOException;
-import java.sql.Time;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
-
 import okhttp3.OkHttpClient;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
-
 import static com.breadykid.searchitem.util.StaticUtil.DEFAULT_TIMEOUT;
 import static com.breadykid.searchitem.util.StaticUtil.SEARCH_ITEM;
 import static com.breadykid.searchitem.util.StaticUtil.SEARCH_ITEM_PRICE_TAOBAO;
@@ -137,7 +123,7 @@ public class Http {
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-
+                msr.onReceivedSuccess("淘宝搜索失败哟～");
             }
         });
     }

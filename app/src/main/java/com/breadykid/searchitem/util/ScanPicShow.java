@@ -16,13 +16,13 @@ import com.breadykid.searchitem.scan.decode.DecodeThread;
 public class ScanPicShow {
 
     public void showScan(Bundle bundle, Context context, ImageView btnSearch){
-        int width = bundle.getInt("width");
-        int height = bundle.getInt("height");
-        LinearLayout.LayoutParams lps = new LinearLayout.LayoutParams(width, height);
-        lps.topMargin = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 30, context.getResources().getDisplayMetrics());
-        lps.leftMargin = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 20, context.getResources().getDisplayMetrics());
-        lps.rightMargin = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 20, context.getResources().getDisplayMetrics());
-        btnSearch.setLayoutParams(lps);
+//        int width = bundle.getInt("width");
+//        int height = bundle.getInt("height");
+//        LinearLayout.LayoutParams lps = new LinearLayout.LayoutParams(width, height);
+//        lps.topMargin = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 30, context.getResources().getDisplayMetrics());
+//        lps.leftMargin = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 20, context.getResources().getDisplayMetrics());
+//        lps.rightMargin = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 20, context.getResources().getDisplayMetrics());
+//        btnSearch.setLayoutParams(lps);
         Bitmap barcode = null;
         byte[] compressedBitmap = bundle.getByteArray(DecodeThread.BARCODE_BITMAP);
         if (compressedBitmap != null) {
