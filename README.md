@@ -25,7 +25,7 @@
 
 接口来源：(网页接口)  
 
-* [中国商品信息服务平台](http://search.anccnet.com)
+* [中国商品信息服务平台](http://search.anccnet.com)：该API增加了人机验证，等于接口间接不开放了，请大家另寻免费API
 * [淘宝网](https://www.taobao.com)
 
 --
