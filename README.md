@@ -75,4 +75,4 @@ dependencies {
 
 --
 ### Bug
-欢迎大家去~~~Google Play或~~~issue里留言～～～
+欢迎大家去issue里留言～～～
