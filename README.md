@@ -5,14 +5,7 @@
 商品条形码／二维码搜索 Android APP  
 
 ---
-### 下载
-<a href="https://play.google.com/store/apps/details?id=com.breadykid.searchitem">
-  <img alt="Android app on Google Play"
-       src="https://developer.android.com/images/brand/en_app_rgb_wo_45.png" />
-</a>
-欢迎评论～～～
 
---
 ### 简述
 *一个轻量的商品条码／二维码扫描工具，并能够实时查询淘宝最低价。*
 
@@ -82,4 +75,4 @@ dependencies {
 
 --
 ### Bug
-欢迎大家去Google Play或issue里留言～～～
+欢迎大家去~~~Google Play或~~~issue里留言～～～
