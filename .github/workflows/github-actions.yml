@@ -6,4 +6,4 @@ jobs:
   pushdeer:
     runs-on: ubuntu-latest
     steps:
-      - run: curl "https://api2.pushdeer.com/message/push?pushkey=PDU12980TRBFWQ4ieHk97sbf4EDrgFsUpxhUypyWd&text=${{ github.repository }}有小可爱Star啦！"
+      - run: curl "https://api2.pushdeer.com/message/push?pushkey=${{ secrets.pushdeer_key }}&text=${{ github.repository }}有小可爱Star啦！"
