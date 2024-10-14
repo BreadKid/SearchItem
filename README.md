@@ -76,3 +76,5 @@ dependencies {
 --
 ### Bug
 欢迎大家去issue里留言～～～
+
+[![Star History Chart](https://api.star-history.com/svg?repos=BreadKid/SearchItem&type=Timeline)](https://star-history.com/#BreadKid/SearchItem&Timeline)
